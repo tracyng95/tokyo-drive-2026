@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0E1A2B">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="自駖導航">
+<title>東京自駖導航 · 2026.10.14–22</title>
+<style>
+:root{--bg:#0B1220;--card:#152238;--card2:#1C2D48;--line:#2A3D5C;--navy:#7EB6FF;--gold:#E2B657;--text:#F4F1EA;--muted:#9AA8BC}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,"PingFang TC","Microsoft JhengHei",sans-serif;line-height:1.45}
+body{padding-bottom:88px}
+header.app{position:sticky;top:0;z-index:20;background:#0B1220;padding:calc(10px + env(safe-area-inset-top)) 16px 10px;border-bottom:1px solid var(--line)}
+header.app h1{margin:0;font-size:18px}
+header.app p{margin:2px 0 0;color:var(--muted);font-size:12px}
+.tabs{display:flex;gap:8px;overflow:auto;padding:10px 16px 4px;position:sticky;top:62px;z-index:19;background:var(--bg)}
+.tabs button{flex:0 0 auto;border:0;border-radius:999px;padding:8px 14px;background:var(--card);color:var(--text);font-size:13px}
+.tabs button.on{background:#2A5A93;color:#fff}
+section{display:none;padding:8px 16px 24px}
+section.on{display:block}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;margin:0 0 12px}
+.card h2{margin:0 0 6px;font-size:17px}
+.card h3{margin:14px 0 6px;font-size:15px;color:var(--gold)}
+.meta{color:var(--muted);font-size:13px}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:10px 12px;border-radius:12px;text-decoration:none;font-size:14px;font-weight:600;border:0}
+.btn.nav{background:#1F6FEB;color:#fff;flex:1}
+.btn.copy{background:var(--card2);color:var(--text);flex:1}
+.btn.tel{background:#245C45;color:#fff}
+.btn.warn{background:#6B3A1F;color:#fff}
+.chip{display:inline-block;background:#22344F;color:var(--navy);border-radius:8px;padding:3px 8px;font-size:12px;margin:0 6px 6px 0}
+.place{background:var(--card2);border-radius:14px;padding:12px;margin-top:10px}
+.place .name{font-weight:700;font-size:16px}
+.kv{display:grid;grid-template-columns:86px 1fr;gap:4px 8px;font-size:13px;margin-top:8px}
+.kv b{color:var(--muted);font-weight:500}
+.leg{border-left:3px solid var(--gold);padding:2px 0 2px 12px;margin:10px 0}
+.leg .t{font-weight:700}
+.mono{font-family:ui-monospace,Menlo,monospace}
+.toast{position:fixed;left:50%;bottom:96px;transform:translateX(-50%);background:#fff;color:#111;padding:10px 16px;border-radius:999px;display:none;z-index:50;font-size:14px}
+nav.bottom{position:fixed;left:0;right:0;bottom:0;background:#101A2C;border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(5,1fr);padding:6px 4px calc(8px + env(safe-area-inset-bottom));z-index:30}
+nav.bottom button{background:none;border:0;color:var(--muted);font-size:11px}
+nav.bottom button.on{color:var(--gold)}
+nav.bottom span{display:block;font-size:16px}
+.alert{background:#3A2416;border:1px solid #8A5A32;color:#F8D9B0;border-radius:12px;padding:10px 12px;font-size:13px;margin:8px 0}
+.okbox{background:#163328;border:1px solid #2F6B52;color:#CFF5E4;border-radius:12px;padding:10px 12px;font-size:13px;margin:8px 0}
+</style>
+</head>
+<body>
+<header class="app"><h1>東京自駖導航冊</h1><p>2026.10.14–22 · 司機專用 · Safari 可直接開</p></header>
+<div class="tabs" id="dayTabs"></div>
+<section id="view-today" class="on"></section>
+<section id="view-days"></section>
+<section id="view-nav"></section>
+<section id="view-stay"></section>
+<section id="view-kit"></section>
+<div class="toast" id="toast">已複製</div>
+<nav class="bottom">
+  <button class="on" data-view="today"><span>▶</span>今日</button>
+  <button data-view="days"><span>📅</span>日程</button>
+  <button data-view="nav"><span>🚗</span>車程</button>
+  <button data-view="stay"><span>🏨</span>住宿</button>
+  <button data-view="kit"><span>ℹ</span>實用</button>
+</nav>
+<script src="app.js"></script>
+</body>
+</html>
