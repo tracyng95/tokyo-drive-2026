@@ -1,9 +1,9 @@
 # 東京自駕遊 2026.10.14–22
 
 Tracy 一家四人（含兩位長者）東京／富士／箱根／伊豆自駕行程一覽網站。  
-靜態單頁、繁體中文、適合長者閱讀與駕駛者速查，亦可加至 iPhone 主畫面離線瀏覽。
+靜態單頁、繁體中文、適合長者閱讀與駕駛者速查，亦可加至 iPhone 主畫面。
 
-## 預覽連結（iPhone Safari 請用這些，不要開本機 .html）
+## 預覽連結（iPhone Safari 請用這些）
 
 1. **raw.githack（建議）**  
    https://raw.githack.com/tracyng95/tokyo-drive-2026/main/index.html
@@ -22,7 +22,7 @@ Tracy 一家四人（含兩位長者）東京／富士／箱根／伊豆自駕�
 
 | 檔案 | 說明 |
 |------|------|
-| `index.html` | 完整行程（CSS／JS 內嵌，可單獨開啟） |
+| `index.html` | 完整行程（自包含；現代 Safari／Chrome 自動解壓顯示） |
 | `app.js` | 空 stub，避免舊連結 404 |
 | `README.md` | 本說明 |
 
