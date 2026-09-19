@@ -22,9 +22,12 @@ Tracy 一家四人（含兩位長者）東京／富士／箱根／伊豆自駕�
 
 | 檔案 | 說明 |
 |------|------|
-| `index.html` | 完整行程（自包含；現代 Safari／Chrome 自動解壓顯示） |
+| `index.html` | 載入器（組合 c1–c4 後 gzip 解壓顯示完整行程） |
+| `c1.txt`–`c4.txt` | 行程內容（gzip + base64 分片） |
 | `app.js` | 空 stub，避免舊連結 404 |
 | `README.md` | 本說明 |
+
+> 需 iOS 16.4+ Safari 或支援 `DecompressionStream` 的瀏覽器；請用上方預覽網址開啟（勿用 file://）。
 
 ## 行程摘要
 
