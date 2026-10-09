@@ -1,12 +1,12 @@
 <!DOCTYPE html><html lang="zh-Hant"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#1a2332"><title>東京自駕遊｜10.14–10.22</title><style>
 *{box-sizing:border-box;margin:0;padding:0}body{font:16px/1.55 -apple-system,"PingFang TC",sans-serif;color:#f0ebe3;background:#0f1419;padding-bottom:24px}
-a{color:#6b9eaf;text-decoration:none}html{scroll-behavior:smooth;scroll-padding-top:60px}
+a{color:#6b9eaf;text-decoration:none}html{scroll-behavior:smooth;scroll-padding-top:70px}
 .hero{padding:24px 12px 16px;text-align:center;background:linear-gradient(135deg,#1a2838,#243448)}.hero h1{font-size:clamp(18px,5vw,26px);color:#fff;margin:6px 0}.sub{color:#a8b0bc;font-size:13px}
 .nav{position:sticky;top:0;z-index:50;background:rgba(15,20,25,.96);border-bottom:1px solid rgba(240,235,227,.08);padding:6px 0}
 .ns{display:flex;gap:5px;overflow-x:auto;padding:0 8px}.cp{flex:0 0 auto;min-width:46px;min-height:40px;padding:4px 7px;border-radius:9px;border:1px solid rgba(240,235,227,.08);background:#1a2332;color:#a8b0bc;font:600 11px sans-serif;display:flex;flex-direction:column;align-items:center;justify-content:center}
 .cp span{font-size:8px}.cp.on,.cp:hover{background:rgba(196,168,130,.15);border-color:#c4a882;color:#c4a882}
 .w{max-width:600px;margin:0 auto;padding:12px 8px}.h2{font-size:17px;font-weight:700;margin:14px 0 8px;color:#fff}
-.cd{background:#1a2332;border:1px solid rgba(240,235,227,.08);border-radius:12px;padding:12px;margin-bottom:8px;scroll-margin-top:62px}
+.cd{background:#1a2332;border:1px solid rgba(240,235,227,.08);border-radius:12px;padding:12px;margin-bottom:8px;scroll-margin-top:70px}
 .dh{margin-bottom:6px;padding-bottom:5px;border-bottom:1px solid rgba(240,235,227,.08)}.dh .d{font-size:17px;font-weight:700;color:#fff;margin-right:5px}.dh .wk{color:#c4a882;font-weight:600}.dh .th{display:block;color:#a8b0bc;font-size:12px}
 .dv{background:rgba(107,158,175,.12);border:1px solid rgba(107,158,175,.35);border-radius:9px;padding:8px;margin-bottom:6px}.dv h4{color:#6b9eaf;font-size:12px}.rt{font-weight:700;margin:4px 0}.rt .a{color:#6b9eaf}
 .bk{background:#1e2a3a;border-radius:7px;padding:7px;margin-bottom:5px}.lb{font-size:10px;font-weight:700;color:#c4a882}
@@ -39,10 +39,37 @@ ul{padding-left:1.2em;margin:4px 0;font-size:13px}li{margin:3px 0}
 <footer class="ft"><p>東京自駕遊 2026.10.14–10.22 · Tracy一家</p><p style="margin-top:3px"><a href="https://github.com/tracyng95/tokyo-drive-2026">GitHub</a> · <a href="https://raw.githack.com/tracyng95/tokyo-drive-2026/main/index.html">預覽</a></p></footer>
 <script>
 (function(){
-var c=document.querySelectorAll("#chips .cp"),p=[];
+var chips=document.getElementById("chips");
+var c=document.querySelectorAll("#chips .cp"),p=[],lockUntil=0;
 c.forEach(function(a){var i=(a.getAttribute("href")||"").slice(1),e=document.getElementById(i);if(e)p.push({c:a,e:e});});
-function o(x){c.forEach(function(y){y.classList.remove("on")});if(x)x.classList.add("on")}
-if("IntersectionObserver"in window){var v=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var m=p.find(function(z){return z.e===e.target});if(m){o(m.c);m.c.scrollIntoView({inline:"center",block:"nearest",behavior:"smooth"})}}})},{rootMargin:"-40% 0px -50% 0px",threshold:0});p.forEach(function(z){v.observe(z.e)})}
+function setOn(x){c.forEach(function(y){y.classList.remove("on")});if(x)x.classList.add("on")}
+function navH(){var n=document.querySelector(".nav");return n?Math.ceil(n.getBoundingClientRect().height)+6:70}
+function scrollToEl(el){
+  var y=el.getBoundingClientRect().top+window.pageYOffset-navH();
+  window.scrollTo({top:Math.max(0,y),behavior:"smooth"});
+}
+function goChip(a){
+  var id=(a.getAttribute("href")||"").slice(1),el=document.getElementById(id);
+  if(!el)return;
+  lockUntil=Date.now()+1000;
+  setOn(a);
+  try{a.scrollIntoView({inline:"center",block:"nearest",behavior:"smooth"})}catch(e){}
+  scrollToEl(el);
+  if(history.replaceState)try{history.replaceState(null,"","#"+id)}catch(e){}
+}
+if(chips)chips.addEventListener("click",function(ev){
+  var a=ev.target&&ev.target.closest?ev.target.closest("a.cp"):null;
+  if(!a||!chips.contains(a))return;
+  ev.preventDefault();
+  goChip(a);
+});
+if("IntersectionObserver"in window){
+  var v=new IntersectionObserver(function(es){
+    if(Date.now()<lockUntil)return;
+    es.forEach(function(e){if(e.isIntersecting){var m=p.find(function(z){return z.e===e.target});if(m){setOn(m.c);try{m.c.scrollIntoView({inline:"center",block:"nearest",behavior:"smooth"})}catch(err){}}}});
+  },{rootMargin:"-70px 0px -55% 0px",threshold:0});
+  p.forEach(function(z){v.observe(z.e)});
+}
 document.querySelectorAll(".mc .b").forEach(function(b){b.addEventListener("click",function(){var t=b.getAttribute("data-m")||"";function d(){b.textContent="已複製";setTimeout(function(){b.textContent="複製"},800)}
 if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(t).then(d).catch(f);else f();
 function f(){var i=document.createElement("input");i.value=t;document.body.appendChild(i);i.select();try{document.execCommand("copy")}catch(e){}document.body.removeChild(i);d()}})});
